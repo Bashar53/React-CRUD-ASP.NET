@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 
 import { addProduct } from '@/services/product.service';
 import { useRouter } from 'next/router';
+import { Form } from 'react-bootstrap';
 
 const create = () => {
 
@@ -24,7 +25,7 @@ const create = () => {
          
 
 
-  
+ 
     <div className="container">
       <h2>Add product List</h2>
       <form onSubmit={(e) => handleSubmit(e)}>

@@ -15,7 +15,16 @@ namespace Employee.BackEnd.Controllers
         [ProducesResponseType(404)]
         [ProducesResponseType(401)]
         [ProducesResponseType(403)]
+
+
         [HttpGet("{id:int}")]
+
+        public async Task<ActionResult<VMProduct>> GetById(int id)
+        {
+            return await HandleQueryAsync(new GetAllProductByIdQuery(id));
+        }
+
+        
 
         [HttpGet]
         public async Task<ActionResult<VMProduct>> GetAllProduct()  
@@ -30,7 +39,7 @@ namespace Employee.BackEnd.Controllers
         }
 
         [HttpPut("{id:int}")]
-        public async Task<ActionResult<VMProduct>> UpdateProduct(int id, VMProduct product) 
+        public async Task<ActionResult<VMProduct>> UpdateProduct(int id,[FromForm] VMProduct product) 
         {
             return await HandleCommandAsync(new UpdateProductCommand(id, product));
         }

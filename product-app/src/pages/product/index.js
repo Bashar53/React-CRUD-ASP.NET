@@ -2,7 +2,7 @@ import React from 'react';
 
 import {
 
-  getProduct
+  getProduct,deleteProduct
 
 } from '@/services/product.service'
 
@@ -36,6 +36,17 @@ const Product = () => {
 
   }, []);
 
+  const handleDelete = async (id) => {
+    const confirm = window.confirm("Are you sure to delete this product?");
+    if (confirm) {
+      try {
+        await deleteProduct(id);
+      } catch (error) {
+        console.error("Error deleting country:", error);
+      }
+    }
+  };
+
 
   return (
    
@@ -56,7 +67,7 @@ const Product = () => {
                     Add Product
                   </Link>
                 </div>
-    <table class="table table-dark">
+    <table className="table table-dark">
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -67,6 +78,7 @@ const Product = () => {
       <th scope="col">Price</th>
       <th scope="col">Barcode</th>
       <th scope="col">Sell Price</th>
+      <th scope="col">Actions</th>
 
 
     </tr>
@@ -89,6 +101,22 @@ const Product = () => {
                             <td> {da.price} </td>
                             <td> {da.barCode} </td>
                             <td> {da.sellPrice} </td>
+
+
+                            <Link
+                                href={`product/edit/${da.id}`}
+                                className="btn btn-sm me-3 btn-success"
+                              >
+                                {" "}
+                                Edit{" "}
+                              </Link>
+
+                              <Button
+                                className="btn btn-sm btn-danger"
+                                onClick={() => handleDelete(da.id)}
+                              >
+                                Delete
+                              </Button>
 
                             
                           
